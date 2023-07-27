@@ -5,7 +5,9 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
 
     const contractFactory = await hre.ethers.getContractFactory("SelfkeyMintableRegistry");
-    const contract = await upgrades.deployProxy(contractFactory, []);
+    const contract = await upgrades.deployProxy(contractFactory, [], {
+        gasPrice: (await ethers.provider.getGasPrice()).mul(120).div(100),
+    });
     await contract.deployed();
     console.log("Deployed contract address:", contract.address);
 
