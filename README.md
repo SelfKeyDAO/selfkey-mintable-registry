@@ -29,23 +29,11 @@ or with code coverage
 
 The following public functions are provided:
 
-* `setSignerAddress(address _signer)` : set authorized signer
-* `registerReward(address _account, uint256 _amount, string memory _scope, address _relying_party, address _signer)` : register unclaimed reward;
-* `registerClaim(address _account, uint256 _amount, string memory _scope, address _relying_party)` : register a claim
-
-* `earned(address _account) external view returns(uint)` : total amount of unclaimed rewards;
-* `claimed(address _account) external view returns(uint)` : total amount of claimed rewards;
-* `balanceOf(address _account) external view returns(uint)` :
-
-* `earnedByScope(address _account, string memory _scope, address _relying_party) external view returns(uint)` :
-* `claimedByScope(address _account, string memory _scope, address _relying_party) external view returns(uint)` :
-* `balanceOfByScope(address _account, string memory _scope, address _relying_party) external view returns(uint)` :
-
 
 ### Contract addresses
 
 ```
-Polygon Mumbai: 0xb270C5aE4c55Ee3EEC2607ee09570b67150EC59E
+Polygon Mumbai: 0xfAA8d6Ce9A457567bF81c00496DfC07959025bA4
 Polygon Mainnet:
 Signer: 0x89145000ADBeCe9D1FFB26F645dcb0883bc5c3d9
 ```

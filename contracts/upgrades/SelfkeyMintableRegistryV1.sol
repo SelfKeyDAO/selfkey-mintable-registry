@@ -3,7 +3,7 @@ pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "./ISelfkeyMintableRegistry.sol";
+import "./ISelfkeyMintableRegistryV1.sol";
 
 struct RewardEntry {
     uint256 timestamp;
@@ -18,14 +18,11 @@ struct MintingEntry {
     uint amount;
 }
 
-contract SelfkeyMintableRegistry is Initializable, OwnableUpgradeable, ISelfkeyMintableRegistry {
+contract SelfkeyMintableRegistryV1 is Initializable, OwnableUpgradeable, ISelfkeyMintableRegistryV1 {
 
     address public authorizedSigner;
     mapping(address => RewardEntry[]) private _rewardEntries;
     mapping(address => MintingEntry[]) private _mintingEntries;
-
-    // an array of authorized addresses
-    mapping(address => bool) public authorizedCallers;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() initializer {}
@@ -79,33 +76,5 @@ contract SelfkeyMintableRegistry is Initializable, OwnableUpgradeable, ISelfkeyM
 
     function balanceOf(address _account) public view returns(uint) {
         return earned(_account) - minted(_account);
-    }
-
-    function isContract(address _addr) private view returns (bool) {
-        uint256 size;
-        assembly {
-            size := extcodesize(_addr)
-        }
-        return size > 0;
-    }
-
-    modifier onlyAuthorizedCaller() {
-        require(authorizedCallers[msg.sender] && isContract(msg.sender), "Not an authorized caller");
-        _;
-    }
-
-    function addAuthorizedCaller(address _caller) external onlyOwner {
-        authorizedCallers[_caller] = true;
-        emit AuthorizedCallerAdded(_caller);
-    }
-
-    function removeAuthorizedCaller(address _caller) external onlyOwner {
-        authorizedCallers[_caller] = false;
-        emit AuthorizedCallerRemoved(_caller);
-    }
-
-    function register(address _account, uint256 _amount, string memory _task, uint _task_id, address _signer) external onlyAuthorizedCaller {
-        _rewardEntries[_account].push(RewardEntry(block.timestamp, _amount, _task, _task_id, _signer));
-        emit RewardRegistered(_account, _amount, _task, _task_id);
     }
 }

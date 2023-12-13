@@ -4,7 +4,8 @@ async function main() {
     const [deployer] = await ethers.getSigners();
     console.log("Deploying contracts with the account:", deployer.address);
 
-    const proxyAddress = "";
+    const proxyAddress = "0xfAA8d6Ce9A457567bF81c00496DfC07959025bA4"; // Mumbai
+    // const proxyAddress = "0xfAA8d6Ce9A457567bF81c00496DfC07959025bA4"; // Polygon
 
     const contractFactory = await hre.ethers.getContractFactory("SelfkeyMintableRegistry");
     const contract = await upgrades.upgradeProxy(proxyAddress, contractFactory);
@@ -12,9 +13,8 @@ async function main() {
 
     console.log("Deployed contract address:", contract.address);
 
-
     // INFO: verify contract after deployment
-    // npx hardhat verify --network mumbai 0xBCc5E951fEd05b660039cABF077a027Bb1dF018c
+    // npx hardhat verify --network mumbai 0xfAA8d6Ce9A457567bF81c00496DfC07959025bA4
 }
 
 main()

@@ -24,6 +24,24 @@ describe("Mintable Registry Tests", function () {
 
     });
 
+    describe("Upgradeability", function() {
+        it("Should upgrade correctly", async function() {
+            [owner, addr1, addr2, receiver, signer, ...addrs] = await ethers.getSigners();
+
+            let factory = await ethers.getContractFactory("SelfkeyMintableRegistryV1");
+            contract = await upgrades.deployProxy(factory, []);
+            await contract.deployed();
+
+            let factory2 = await ethers.getContractFactory("SelfkeyMintableRegistry");
+            const upgradedContract = await upgrades.upgradeProxy(contract.address, factory2);
+
+            await expect(upgradedContract.connect(owner).addAuthorizedCaller(signer.address, { from: owner.address }))
+                .to.emit(upgradedContract, 'AuthorizedCallerAdded').withArgs(signer.address);
+
+        });
+    });
+
+
     describe("Deployment", function() {
         it("Deployed correctly and authorized signer was assigned", async function() {
             expect(await contract.authorizedSigner()).to.equal(signer.address);
