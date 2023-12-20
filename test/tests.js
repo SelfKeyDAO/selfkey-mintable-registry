@@ -112,7 +112,7 @@ describe("Mintable Registry Tests", function () {
 
 
     describe("Register minting", function() {
-        it("Authorized signer can register a mint", async function() {
+        it("Authorized signer can register a reward", async function() {
             const _account = addr2.address;
             const _amount = 100;
             const _task = 'Code Submission';
@@ -180,7 +180,7 @@ describe("Mintable Registry Tests", function () {
             expect(await contract.minted(_account)).to.equal(_mint_amount);
         });
 
-        it("Non-authorized signer cannot register a mint", async function() {
+        it("Non-authorized signer cannot register a reward", async function() {
             const _account = addr2.address;
             const _amount = 100;
             const _task = 'Code Submission';

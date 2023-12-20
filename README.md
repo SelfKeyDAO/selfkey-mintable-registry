@@ -34,7 +34,7 @@ The following public functions are provided:
 
 ```
 Polygon Mumbai: 0xfAA8d6Ce9A457567bF81c00496DfC07959025bA4
-Polygon Mainnet:
+Polygon Mainnet: 0x64450DA938d06bE7EEc68E4Ead99FfF05D8Cebe7
 Signer: 0x89145000ADBeCe9D1FFB26F645dcb0883bc5c3d9
 ```
 
