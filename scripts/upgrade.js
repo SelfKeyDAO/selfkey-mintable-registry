@@ -8,7 +8,7 @@ async function main() {
     // const proxyAddress = "0x64450DA938d06bE7EEc68E4Ead99FfF05D8Cebe7"; // Polygon
 
     const contractFactory = await hre.ethers.getContractFactory("SelfkeyMintableRegistry");
-    const contract = await upgrades.upgradeProxy(proxyAddress, contractFactory);
+    const contract = await upgrades.upgradeProxy(proxyAddress, contractFactory, { timeout: 500000 });
     await contract.deployed();
 
     console.log("Deployed contract address:", contract.address);

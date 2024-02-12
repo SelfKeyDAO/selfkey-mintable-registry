@@ -193,7 +193,7 @@ describe("Mintable Registry Tests", function () {
             const _mint_amount = 50;
 
             await expect(contract.connect(addr2).registerMinting(_account, _mint_amount))
-                .to.be.revertedWith('Not authorized to register')
+                .to.be.revertedWith('Not an authorized caller or signer')
 
         });
 

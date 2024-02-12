@@ -46,8 +46,7 @@ contract SelfkeyMintableRegistry is Initializable, OwnableUpgradeable, ISelfkeyM
         emit RewardRegistered(_account, _amount, _task, _task_id);
     }
 
-    function registerMinting(address _account, uint256 _amount) external {
-        require(authorizedSigner == msg.sender, "Not authorized to register");
+    function registerMinting(address _account, uint256 _amount) external onlyAuthorizedCallerOrSigner {
         require(balanceOf(_account) >= _amount, "Not enough balance");
         _mintingEntries[_account].push(MintingEntry(block.timestamp, _amount));
         emit MintingRegistered(_account, _amount);
@@ -107,5 +106,10 @@ contract SelfkeyMintableRegistry is Initializable, OwnableUpgradeable, ISelfkeyM
     function register(address _account, uint256 _amount, string memory _task, uint _task_id, address _signer) external onlyAuthorizedCaller {
         _rewardEntries[_account].push(RewardEntry(block.timestamp, _amount, _task, _task_id, _signer));
         emit RewardRegistered(_account, _amount, _task, _task_id);
+    }
+
+    modifier onlyAuthorizedCallerOrSigner() {
+        require((authorizedCallers[msg.sender] && isContract(msg.sender)) || authorizedSigner == msg.sender, "Not an authorized caller or signer");
+        _;
     }
 }
