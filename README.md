@@ -1,7 +1,7 @@
 # Selfkey Mintable Registry Contract
 
 ## Overview
-Selfkey Mintable Registry. Hosted on sidechain.
+Selfkey SELF Mintable Registry.
 
 ## Development
 
@@ -25,35 +25,8 @@ or with code coverage
     npx hardhat coverage
 
 
-### Contract method interface
-
-The following public functions are provided:
-
-
-### Contract addresses
-
-```
-Polygon Mumbai: 0xfAA8d6Ce9A457567bF81c00496DfC07959025bA4
-Polygon Mainnet: 0x64450DA938d06bE7EEc68E4Ead99FfF05D8Cebe7
-Signer: 0x89145000ADBeCe9D1FFB26F645dcb0883bc5c3d9
-```
-
-### Deploying and upgrading contract
-
-Deploy proxy and initial version of the contract
-```
-npx hardhat run scripts/deploy.js --network mumbai
-```
-
-### Verifying contract
-
-```
-npx hardhat verify --network mumbai <contract_address>
-```
-
 ## Contributing
-
 Please see the [contributing notes](CONTRIBUTING.md).
 
-
-## Team
+## Copyright
+Copyright SelfKey DAO Foundation 2024. All rights reserved.
